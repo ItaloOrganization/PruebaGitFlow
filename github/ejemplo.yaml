@@ -8,8 +8,8 @@ on:
 
 jobs:
   primer_job: 
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       -name: Revisar Archivos
       run: ls
-      
+
