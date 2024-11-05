@@ -1,25 +1,25 @@
-name: Deploy en AWS lighsail
+name: Deploy en AWS Lightsail
 
 on:
-    push:
-        branches: ['main']
+  push:
+    branches: ['main']
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v4
-          - name: Conexion SSH
-            uses: webfactory/ssh-agent@v0.5.3
-            with:
-              ssh-private-key: ${{secrets.SSH_PRIVATE_KEY}}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-          - name: Despliegue en lightsail
-            run: |
-              ssh -o strictHostKeyCheking = no
-              ubuntu@34.238.80.206 << 'EOF'
-              cd /var/www/html
-              sudo rm -rf *
-              git clone https://github.com/ItaloOrganization/PruebaGitFlow.git .
-              EOF
+      - name: Conexion SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Despliegue en Lightsail
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@34.238.80.206 << 'EOF'
+            cd /var/www/html
+            sudo rm -rf *
+            git clone https://github.com/ItaloOrganization/PruebaGitFlow.git .
+          EOF
