@@ -19,7 +19,14 @@ jobs:
       - name: Despliegue en Lightsail
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@34.238.80.206 << 'EOF'
-            cd /var/www/html
-            sudo rm -rf *
-            git clone https://github.com/ItaloOrganization/PruebaGitFlow.git .
+          cd /var/www/html
+          # sudo rm -rf *
+          if [ -d ".git" ]; then
+              # Si es un repositorio git, hacer pull
+              git pull origin main
+          else
+              # Si no existe, clonar el repositorio
+              git clone https://github.com/ItaloOrganization/PruebaGitFlow.git .
+              git .
+          fi
           EOF
